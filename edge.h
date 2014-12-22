@@ -6,7 +6,7 @@ namespace graph {
     class edge {
         public:
             edge() {};
-            edge(const TEdge& edge) : _data{edge} {};
+            edge(const TEdge& edge) : _data(edge) {};
             ~edge() {};
 
         protected:

@@ -1,12 +1,13 @@
 
+#pragma once
+
 #include <memory>
 #include <map>
+#include <vector>
 
 #include "node.h"
 #include "edge.h"
-#pragma once
 
-#include <vector>
 
 namespace graph {
 
@@ -24,8 +25,8 @@ namespace graph {
             graph_base() {};
             ~graph_base() {};
 
-            virtual node_ptr get_node(const _t_node_id& node_id) = 0;
-            virtual int get_edges(const _t_node_id& node_id, std::pair<std::vector<edge_ptr>, std::vector<edge_ptr>>& edges) = 0;
+            virtual node_ptr get_node(const _t_node_id& node_id) const = 0;
+            virtual int get_edges(const _t_node_id& node_id, std::pair<std::vector<edge_ptr>, std::vector<edge_ptr>>& edges) const = 0;
         
         };
 
