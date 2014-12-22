@@ -10,7 +10,7 @@ namespace graph {
             ~node() {};
 
             const TNodeID id;
-        protected:
-            TNode _data;
+        //protected:
+            TNode data;
         };
     }

@@ -11,8 +11,8 @@ namespace graph {
 
             const TNodeID init;
             const TNodeID end;
-        protected:
-            TEdge _data;
+        //protected:
+            TEdge data;
             
         };
     }
