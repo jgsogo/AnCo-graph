@@ -14,11 +14,13 @@ namespace graph {
             //using node_ptr = typename graph_base<TNode, TEdge, TNodeID>::node_ptr;
             //using edge_ptr = typename graph_base<TNode, TEdge, TNodeID>::edge_ptr;
             //using _t_node_id = typename graph_base<TNode, TEdge, TNodeID>::_t_node_id;
-            typename typedef graph_base<TNode, TEdge, TNodeID>::node_ptr node_ptr;
-            typename typedef graph_base<TNode, TEdge, TNodeID>::edge_ptr edge_ptr;
-            typename typedef graph_base<TNode, TEdge, TNodeID>::_t_node_id _t_node_id;
+            typedef typename graph_base<TNode, TEdge, TNodeID>::node_ptr node_ptr;
+            typedef typename graph_base<TNode, TEdge, TNodeID>::edge_ptr edge_ptr;
+            typedef typename graph_base<TNode, TEdge, TNodeID>::_t_node_id _t_node_id;
+            typedef typename graph_base<TNode, TEdge, TNodeID>::_t_edge _t_edge;
+            typedef typename graph_base<TNode, TEdge, TNodeID>::_t_node _t_node;
 
-            typename typedef std::map<_t_node_id, node_ptr> _t_node_map;
+            typedef typename std::map<_t_node_id, node_ptr> _t_node_map;
             /*
             struct edge_map_key {
                 edge_map_key(const TNodeID init, const TNodeID end) : _init(init), _end(end) {
@@ -47,8 +49,8 @@ namespace graph {
                     }
                 }
             virtual int get_edges(const _t_node_id& node_id, std::pair<std::vector<edge_ptr>, std::vector<edge_ptr>>& edges) const {
-                _t_edge_map::const_iterator it_out = _edges_outgoing.find(node_id);
-                _t_edge_map::const_iterator it_in = _edges_incoming.find(node_id);
+                typename _t_edge_map::const_iterator it_out = _edges_outgoing.find(node_id);
+                typename _t_edge_map::const_iterator it_in = _edges_incoming.find(node_id);
                 if (it_out != _edges_outgoing.end()) {
                     edges.first = it_out->second;
                     }
@@ -58,9 +60,9 @@ namespace graph {
                 return edges.first.size() + edges.second.size();
                 }
             virtual edge_ptr get_edge(const _t_node_id& node_id_1, const _t_node_id& node_id_2) const {
-                _t_edge_map::const_iterator it = _edges_outgoing.find(node_id_1);
+                typename _t_edge_map::const_iterator it = _edges_outgoing.find(node_id_1);
                 if (it != _edges_outgoing.end()) {
-                    _t_edge_map::mapped_type::const_iterator it_ret = std::find_if(it->second.begin(), it->second.end(), [&node_id_2](const edge_ptr& ptr){
+                    typename _t_edge_map::mapped_type::const_iterator it_ret = std::find_if(it->second.begin(), it->second.end(), [&node_id_2](const edge_ptr& ptr){
                         return node_id_2 == ptr->end;
                         });
                     if (it_ret != it->second.end()) {
@@ -83,7 +85,7 @@ namespace graph {
                 return edge;
                 }
             void delete_edge(const _t_node_id& node_id_1, const _t_node_id& node_id_2) {
-                _t_edge_map::iterator it = _edges_outgoing.find(node_id_1);
+                typename _t_edge_map::iterator it = _edges_outgoing.find(node_id_1);
                 std::remove_if(it->second.begin(), it->second.end(), [&node_id_1, &node_id_2](const edge_ptr& ptr) {
                     assert(node_id_1 == ptr->init);
                     return node_id_2 == ptr->end;
