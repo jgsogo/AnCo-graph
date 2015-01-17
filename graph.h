@@ -106,6 +106,10 @@ namespace graph {
                 _edges_outgoing.erase(node_id);
                 _edges_incoming.erase(node_id);
                 }
+
+            const _t_node_map& get_nodes() const { return _node_map;}
+            const _t_edge_map& get_edges_outgoing() const { return _edges_outgoing;}
+            const _t_edge_map& get_edges_incoming() const { return _edges_incoming;}
         protected:
             _t_node_map _node_map;
             _t_edge_map _edges_outgoing;
