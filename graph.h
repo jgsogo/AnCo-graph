@@ -72,10 +72,11 @@ namespace graph {
                 throw not_found();
                 }
 
-            edge_ptr add_edge(const _t_node_id& node_id_1, const _t_node_id& node_id_2) {
+            edge_ptr add_edge(const _t_node_id& node_id_1, const _t_node_id& node_id_2, const float& cost) {
                 assert(_node_map.find(node_id_1) != _node_map.end());
                 assert(_node_map.find(node_id_2) != _node_map.end());
                 auto edge = std::make_shared<_t_edge>(node_id_1, node_id_2);
+                edge->data.length = cost;
                 if (std::find_if(_edges_incoming[node_id_2].begin(), _edges_incoming[node_id_2].end(), [this, &node_id_1](edge_ptr& ptr){
                         return (ptr->init == node_id_1);
                         }) == _edges_incoming[node_id_2].end()) {
